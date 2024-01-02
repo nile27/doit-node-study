@@ -1,15 +1,12 @@
 const express = require("express");
 
 const router = express.Router();
+const {
+  getAllContacts,
+  createContact,
+} = require("../controller/contactController");
 
-router
-  .route("/")
-  .get((req, res) => {
-    res.send("Contacts Page");
-  })
-  .post((req, res) => {
-    res.send("Contacts Page Post");
-  });
+router.route("/").get(getAllContacts).post(createContact);
 
 router
   .route("/:id")
