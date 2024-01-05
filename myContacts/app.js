@@ -11,6 +11,7 @@ app.use(express.static("./public"));
 
 dbConnect();
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/contacts", require("./routes/contactRouter"));
 

@@ -6,19 +6,20 @@ const Contact = require("../models/contactModel");
 const getAllContacts = asyncHandler(async (req, res) => {
   // 전체 연락처 보기
   const contacts = await Contact.find();
-  const users = [
-    { name: "Kim", email: "kim@abc.com", phone: "12345" },
-    { name: "Lim", email: "Lim@abc.com", phone: "12341235" },
-  ];
-
-  res.render("getAll", { users: users });
+  res.render("index", { contacts: contacts });
 });
 
+// View add Contact form
+// get /contacts/add
+const addContactForm = (req, res) => {
+  res.render("add");
+};
+
 //  Create a contact
-//  POST /contacts
+//  POST /contacts/add
 const createContact = asyncHandler(async (req, res) => {
   // 새 연락처 추가하기
-  console.log(req);
+  console.log(req.body);
   const { name, email, phone } = req.body;
   if (!name || !email || !phone) {
     return res.status(400).send("필수값이 입력되지 않았습니다.");
@@ -81,4 +82,5 @@ module.exports = {
   getContact,
   updateContact,
   deleteContact,
+  addContactForm,
 };
