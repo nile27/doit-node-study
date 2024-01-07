@@ -1,6 +1,7 @@
 const express = require("express");
 const dbConnect = require("./config/dbConnect");
 const bodyParser = require("body-parser");
+const methodoverride = require("method-override");
 const app = express();
 
 // ejs view engine 세팅
@@ -8,6 +9,8 @@ app.set("view engine", "ejs");
 app.set("views", "./views");
 
 app.use(express.static("./public"));
+
+app.use(methodoverride("_method"));
 
 dbConnect();
 
