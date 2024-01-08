@@ -17,6 +17,7 @@ dbConnect();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/contacts", require("./routes/contactRouter"));
+app.use("/", require("./routes/loginRouter"));
 
 app.listen(3000, () => {
   console.log("서버 실행 중");
