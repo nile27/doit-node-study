@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mainLayout = "../views/layouts/main.ejs";
+const adminLayout = "../views/layouts/admin";
 const Post = require("../models/post");
 const asyncHandler = require("express-async-handler");
 
@@ -23,7 +24,12 @@ router.get(
   "/post/:id",
   asyncHandler(async (req, res) => {
     const data = await Post.findOne({ _id: req.params.id });
-    res.render("post", { data, layout: mainLayout });
+
+    if (req.cookies.token) {
+      res.render("post", { data, layout: adminLayout });
+    } else {
+      res.render("post", { data, layout: mainLayout });
+    }
   })
 );
 
